@@ -1,15 +1,25 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
-import ItemListContainer from './components/ItemListContainer';
+import ItemListContainer from './pages/ItemListContainer';
+import ItemDetailContainer from './pages/ItemDetailContainer';
+import Cart from './components/Cart';
+import CheckoutForm from './pages/CheckoutForm';
 import './App.css';
 
-function App() {
+export default function App() {
   return (
-    <div>
+    <>
       <NavBar />
-      <ItemListContainer greeting="¡Bienvenido a MiTienda! Tus productos favoritos están a un clic 😄" />
-    </div>
+      <main>
+        <Routes>
+          <Route path="/" element={<ItemListContainer />} />
+          <Route path="/product/:id" element={<ItemDetailContainer />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<CheckoutForm />} />
+          <Route path="*" element={<p style={{ padding: 20 }}>404 - No encontrado</p>} />
+        </Routes>
+      </main>
+    </>
   );
 }
-
-export default App;

@@ -1,0 +1,25 @@
+.cart-widget {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+  background: #2f7a3e;
+  padding: 6px 12px;
+  border-radius: 25px;
+  color: white;
+  transition: 0.2s;
+}
+
+.cart-widget:hover {
+  background: #256332;
+}
+
+.cart-count {
+  margin-left: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  background: #d39b00;
+  padding: 2px 8px;
+  border-radius: 12px;
+  color: #fff;
+}

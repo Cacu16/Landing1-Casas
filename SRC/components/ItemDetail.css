@@ -1,0 +1,15 @@
+.detail-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+  align-items: start;
+}
+
+.detail-img img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.detail-info h2 { margin-top: 0; }
+.detail-price { color: #2f7a3e; font-weight: 700; }
