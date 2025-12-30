@@ -1,20 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import ItemList from '../components/ItemList';
-import { products as mockProducts } from '../data/products';
+import React, { useEffect, useState } from "react";
+import ItemList from "../components/ItemList";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
 
 export default function ItemListContainer() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
+    const getProducts = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "products"));
+        const productsData = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setProducts(productsData);
+      } catch (error) {
+        console.error("Error al traer productos:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    const t = setTimeout(() => {
-      setProducts(mockProducts);
-      setLoading(false);
-    }, 400);
-
-    return () => clearTimeout(t);
+    getProducts();
   }, []);
 
   if (loading) return <p style={{ padding: 20 }}>Cargando productos...</p>;
@@ -22,7 +31,7 @@ export default function ItemListContainer() {
 
   return (
     <div>
-      <header style={{ padding: 20, textAlign: 'center' }}>
+      <header style={{ padding: 20, textAlign: "center" }}>
         <h1>Yerba Mate Ciudad Evita — Catálogo</h1>
         <p>Seleccioná tu yerba o accesorio y agrégala al carrito.</p>
       </header>
@@ -31,4 +40,3 @@ export default function ItemListContainer() {
     </div>
   );
 }
-
